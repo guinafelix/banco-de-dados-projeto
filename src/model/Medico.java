@@ -31,4 +31,12 @@ public class Medico extends GenericModel {
 		this.crm = crm;
 	}
 	
+	@Override
+	public String toString() {
+		return "Medico {"
+				+ "id= " + this.getId() + "\'"
+						+ "Nome: " + this.nome + "\'" +
+						"CRM: " + this.getNome();
+	}
+	
 }

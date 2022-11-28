@@ -33,13 +33,12 @@ public class Paciente extends GenericModel {
 		this.dt_nascimento = dt_nascimento;
 	}
 	
-	
+	@Override
 	public String toString() {
 		return "Paciente {"
 				+ "id= " + this.getId() + "\'"
 						+ "Nome: " + this.nome + "\'" +
-						"data de nascimento: " + this.getDt_nascimento();
-		
+						"Data de nascimento: " + this.dt_nascimento;	
 	}
 	
 }

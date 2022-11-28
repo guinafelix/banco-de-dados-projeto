@@ -18,5 +18,11 @@ public class SiglaFormacao extends GenericModel {
 		this.sigla = sigla;
 	}
 	
+	@Override
+	public String toString() {
+		return "SiglaFormacao {"
+				+ "id= " + this.getId() + "\'"
+						+ "Sigla: " + this.sigla;
+	}
 	
 }
