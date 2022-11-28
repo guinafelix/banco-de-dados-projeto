@@ -3,8 +3,6 @@ package model;
 public class SiglaFormacao extends GenericModel {
 	private String sigla;
 	
-	
-
 	public SiglaFormacao(Long id, String sigla) {
 		this.sigla = sigla;
 		super.setId(id);;
