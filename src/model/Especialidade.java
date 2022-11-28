@@ -5,15 +5,9 @@ public class Especialidade extends GenericModel {
 	private String observacao;
 
 	public Especialidade(Long id, String descricao, String observacao) {
-		this.setId(id);
 		this.descricao = descricao;
 		this.observacao = observacao;
-	}
-
-	public Especialidade(String descricao, String observacao) {
-		super();
-		this.descricao = descricao;
-		this.observacao = observacao;
+		super.setId(id);
 	}
 
 	public String getDescricao() {
