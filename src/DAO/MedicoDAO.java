@@ -10,13 +10,13 @@ import model.Medico;
 
 public class MedicoDAO extends ConexaoDB{
 	
-	private static final String INSERT_Medico_SQL = "INSERT INTO Medico (NOME, crm) VALUES (?, ?);";
+	private static final String INSERT_Medico_SQL = "INSERT INTO medico (NOME, crm) VALUES (?, ?);";
 	private static final String SELECT_Medico_BY_ID = "SELECT id, NOME, crm FROM Medico WHERE id = ?";
-	private static final String SELECT_ALL_Medico = "SELECT * FROM Medico;";
-	private static final String DELETE_Medico_SQL = "DELETE FROM Medico WHERE id = ?;";
-	private static final String BUSCAR_POR_NOME_Medico_SQL = "DELETE FROM Medico WHERE NOME = ?;";
-	private static final String UPDATE_Medico_SQL = "UPDATE Medico SET NOME = ?, crm = ? WHERE id = ?;";
-	private static final String TOTAL = "SELECT count(1) FROM Medico;";
+	private static final String SELECT_ALL_Medico = "SELECT * FROM medico;";
+	private static final String DELETE_Medico_SQL = "DELETE FROM medico WHERE id = ?;";
+	private static final String BUSCAR_POR_NOME_Medico_SQL = "DELETE FROM medico WHERE NOME = ?;";
+	private static final String UPDATE_Medico_SQL = "UPDATE medico SET NOME = ?, crm = ? WHERE id = ?;";
+	private static final String TOTAL = "SELECT count(1) FROM medico;";
 	
 	public Integer count() {
 		Integer count = 0;
