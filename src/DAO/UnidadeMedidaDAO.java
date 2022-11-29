@@ -56,7 +56,7 @@ public class UnidadeMedidaDAO extends ConexaoDB {
 			return entidade;
 		}
 	    
-	    public UnidadeMedida findBySigla(String descricao) {
+	    public UnidadeMedida findByDescricao(String descricao) {
 			UnidadeMedida entidade = null;
 			try (PreparedStatement preparedStatement = prepararSQL( BUSCAR_POR_DESCRICAO_UNIDADE_MEDIDA_SQL)) {
 				preparedStatement.setString(1, descricao);
