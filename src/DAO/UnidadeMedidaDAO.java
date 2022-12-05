@@ -14,7 +14,7 @@ public class UnidadeMedidaDAO extends ConexaoDB {
 	private static final String SELECT_UNIDADE_MEDIDA_BY_ID = "SELECT id, DESCRICAO FROM UNIDADE_MEDIDA WHERE id = ?";
 	private static final String SELECT_ALL_UNIDADE_MEDIDA = "SELECT * FROM UNIDADE_MEDIDA;";
 	private static final String DELETE_UNIDADE_MEDIDA_SQL = "DELETE FROM UNIDADE_MEDIDA WHERE id = ?;";
-	private static final String BUSCAR_POR_DESCRICAO_UNIDADE_MEDIDA_SQL = "DELETE FROM UNIDADE_MEDIDA WHERE DESCRICAO = ?;";
+	private static final String BUSCAR_POR_DESCRICAO_UNIDADE_MEDIDA_SQL = "SELECT FROM UNIDADE_MEDIDA WHERE DESCRICAO = ?;";
 	private static final String UPDATE_UNIDADE_MEDIDA_SQL = "UPDATE UNIDADE_MEDIDA SET DESCRICAO = ? WHERE id = ?;";
 	private static final String TOTAL = "SELECT count(1) FROM UNIDADE_MEDIDA;";
 	

@@ -13,7 +13,7 @@ public class ResponsavelTecnicoDAO extends ConexaoDB {
 	private static final String SELECT_RESPONSAVEL_TECNICO_BY_ID = "SELECT id, NOME, conselho FROM RESPONSAVEL_TECNICO WHERE id = ?";
 	private static final String SELECT_ALL_RESPONSAVEL_TECNICO = "SELECT * FROM RESPONSAVEL_TECNICO;";
 	private static final String DELETE_RESPONSAVEL_TECNICO_SQL = "DELETE FROM RESPONSAVEL_TECNICO WHERE id = ?;";
-	private static final String BUSCAR_POR_NOME_RESPONSAVEL_TECNICO_SQL = "DELETE FROM RESPONSAVEL_TECNICO WHERE NOME = ?;";
+	private static final String BUSCAR_POR_NOME_RESPONSAVEL_TECNICO_SQL = "SELECT FROM RESPONSAVEL_TECNICO WHERE NOME = ?;";
 	private static final String UPDATE_RESPONSAVEL_TECNICO_SQL = "UPDATE RESPONSAVEL_TECNICO SET NOME = ?, conselho = ?, formacao = ?, sigla_formacao_id = ? WHERE id = ?;";
 	private static final String TOTAL = "SELECT count(1) FROM RESPONSAVEL_TECNICO;";
     

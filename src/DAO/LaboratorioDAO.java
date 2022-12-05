@@ -13,7 +13,7 @@ public class LaboratorioDAO extends ConexaoDB {
 	private static final String SELECT_LABORATORIO_BY_ID = "SELECT id, DESCRICAO, CNES, CNPJ, CRBM, DESCRICAO_FANTASIA FROM LABORATORIO WHERE id = ?";
 	private static final String SELECT_ALL_LABORATORIO = "SELECT * FROM LABORATORIO;";
 	private static final String DELETE_LABORATORIO_SQL = "DELETE FROM LABORATORIO WHERE id = ?;";
-	private static final String BUSCAR_POR_DESCRICAO_LABORATORIO_SQL = "DELETE FROM LABORATORIO WHERE DESCRICAO = ?;";
+	private static final String BUSCAR_POR_DESCRICAO_LABORATORIO_SQL = "SELECT FROM LABORATORIO WHERE DESCRICAO = ?;";
 	private static final String UPDATE_LABORATORIO_SQL = "UPDATE LABORATORIO SET DESCRICAO = ?, CNES = ?, CPNJ = ?, CRBM = ?, NOME_FANTASIA = ? WHERE id = ?;";
 	private static final String TOTAL = "SELECT count(1) FROM LABORATORIO;";
     

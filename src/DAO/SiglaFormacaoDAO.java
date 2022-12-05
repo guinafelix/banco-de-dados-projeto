@@ -13,7 +13,7 @@ public class SiglaFormacaoDAO extends ConexaoDB {
 	private static final String SELECT_SIGLA_FORMACAO_BY_ID = "SELECT id, SIGLA FROM SIGLA_FORMACAO WHERE id = ?";
 	private static final String SELECT_ALL_SIGLA_FORMACAO = "SELECT * FROM SIGLA_FORMACAO;";
 	private static final String DELETE_SIGLA_FORMACAO_SQL = "DELETE FROM SIGLA_FORMACAO WHERE id = ?;";
-	private static final String BUSCAR_POR_SIGLA_SIGLA_FORMACAO_SQL = "DELETE FROM SIGLA_FORMACAO WHERE SIGLA = ?;";
+	private static final String BUSCAR_POR_SIGLA_SIGLA_FORMACAO_SQL = "SELECT FROM SIGLA_FORMACAO WHERE SIGLA = ?;";
 	private static final String UPDATE_SIGLA_FORMACAO_SQL = "UPDATE SIGLA_FORMACAO SET SIGLA = ? WHERE id = ?;";
 	private static final String TOTAL = "SELECT count(1) FROM SIGLA_FORMACAO;";
 	

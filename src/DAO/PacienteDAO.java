@@ -14,7 +14,7 @@ public class PacienteDAO extends ConexaoDB {
 	private static final String SELECT_PACIENTE_BY_ID = "SELECT id, NOME, dt_nascimento FROM PACIENTE WHERE id = ?";
 	private static final String SELECT_ALL_PACIENTE = "SELECT * FROM PACIENTE;";
 	private static final String DELETE_PACIENTE_SQL = "DELETE FROM PACIENTE WHERE id = ?;";
-	private static final String BUSCAR_POR_NOME_PACIENTE_SQL = "DELETE FROM PACIENTE WHERE NOME = ?;";
+	private static final String BUSCAR_POR_NOME_PACIENTE_SQL = "SELECT FROM PACIENTE WHERE NOME = ?;";
 	private static final String UPDATE_PACIENTE_SQL = "UPDATE PACIENTE SET NOME = ?, dt_nascimento = ? WHERE id = ?;";
 	private static final String TOTAL = "SELECT count(1) FROM PACIENTE;";
     
