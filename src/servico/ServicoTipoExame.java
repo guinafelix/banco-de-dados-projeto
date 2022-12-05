@@ -16,8 +16,8 @@ public class ServicoTipoExame {
 		return tipoExameDAO.findById(id);
 	}
 
-	public void update(TipoExame tipoExame) throws SQLException {
-		tipoExameDAO.updateTipoExame(tipoExame);
+	public void update(TipoExame entidade) throws SQLException {
+		tipoExameDAO.updateTipoExame(entidade);
 	}
 
 	public void remover(Integer id) throws SQLException {
