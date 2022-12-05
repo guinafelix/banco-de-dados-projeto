@@ -90,10 +90,10 @@ public class ExameDAO extends ConexaoDB {
 			while (rs.next()) {
 				String descricao = rs.getString("descricao");
 				String metodo = rs.getString("metodo");
-				int materialExameId = rs.getInt("material_exame_i");
-				int siglaFormacaoId = rs.getInt("sigla_formacao_id");
+				int materialExameId = rs.getInt("material_exame_id");
+				int tipoExameId = rs.getInt("tipo_exame_id");
 				
-				entidade = new Exame(id, descricao, metodo, materialExameId, siglaFormacaoId);
+				entidade = new Exame(id, descricao, metodo, materialExameId, tipoExameId);
 			}
 		} catch (SQLException e) {
 			printSQLException(e);
@@ -113,9 +113,9 @@ public class ExameDAO extends ConexaoDB {
 				String descricao = rs.getString("descricao");
 				String metodo = rs.getString("metodo");
 				int materialExameId = rs.getInt("material_exame_i");
-				int siglaFormacaoId = rs.getInt("sigla_formacao_id");
+				int tipoExameId = rs.getInt("tipo_exame_id");
 				
-				entidades.add(new Exame(id, descricao, metodo, materialExameId, siglaFormacaoId));
+				entidades.add(new Exame(id, descricao, metodo, materialExameId, tipoExameId));
 			}
 		} catch (SQLException e) {
 			printSQLException(e);
