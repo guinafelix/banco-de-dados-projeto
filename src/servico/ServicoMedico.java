@@ -16,8 +16,8 @@ public class ServicoMedico {
 		return medicoDAO.findById(id);
 	}
 
-	public void update(Medico Medico) throws SQLException {
-		medicoDAO.updateMedico(Medico);
+	public void update(Medico medico) throws SQLException {
+		medicoDAO.updateMedico(medico);
 	}
 
 	public void remover(Integer id) throws SQLException {

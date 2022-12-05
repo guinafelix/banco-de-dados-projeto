@@ -16,8 +16,8 @@ private LaboratorioDAO laboratorioDAO = new LaboratorioDAO();
 		return laboratorioDAO.findById(id);
 	}
 
-	public void update(Laboratorio Laboratorio) throws SQLException {
-		laboratorioDAO.updateLaboratorio(Laboratorio);
+	public void update(Laboratorio laboratorio) throws SQLException {
+		laboratorioDAO.updateLaboratorio(laboratorio);
 	}
 
 	public void remover(Integer id) throws SQLException {

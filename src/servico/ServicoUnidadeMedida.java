@@ -17,8 +17,8 @@ public class ServicoUnidadeMedida {
 		return unidadeMedidaDAO.findById(id);
 	}
 
-	public void update(UnidadeMedida UnidadeMedida) throws SQLException {
-		unidadeMedidaDAO.updateUnidadeMedida(UnidadeMedida);
+	public void update(UnidadeMedida unidadeMedida) throws SQLException {
+		unidadeMedidaDAO.updateUnidadeMedida(unidadeMedida);
 	}
 
 	public void remover(Integer id) throws SQLException {

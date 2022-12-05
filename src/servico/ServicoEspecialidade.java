@@ -16,8 +16,8 @@ public class ServicoEspecialidade {
 		return especialidadeDAO.findById(id);
 	}
 
-	public void update(Especialidade marca) throws SQLException {
-		especialidadeDAO.updateEspecialidade(marca);
+	public void update(Especialidade especialidade) throws SQLException {
+		especialidadeDAO.updateEspecialidade(especialidade);
 	}
 
 	public void remover(Integer id) throws SQLException {

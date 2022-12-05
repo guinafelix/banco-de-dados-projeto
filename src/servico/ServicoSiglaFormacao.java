@@ -16,8 +16,8 @@ public class ServicoSiglaFormacao {
 		return siglaFormacaoDAO.findById(id);
 	}
 
-	public void update(SiglaFormacao SiglaFormacao) throws SQLException {
-		siglaFormacaoDAO.updateSiglaFormacao(SiglaFormacao);
+	public void update(SiglaFormacao siglaFormacao) throws SQLException {
+		siglaFormacaoDAO.updateSiglaFormacao(siglaFormacao);
 	}
 
 	public void remover(Integer id) throws SQLException {

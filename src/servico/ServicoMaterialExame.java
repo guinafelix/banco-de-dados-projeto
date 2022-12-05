@@ -17,8 +17,8 @@ public class ServicoMaterialExame {
 		return materialExameDAO.findById(id);
 	}
 
-	public void update(MaterialExame MaterialExame) throws SQLException {
-		materialExameDAO.updateMaterialExame(MaterialExame);
+	public void update(MaterialExame materialExame) throws SQLException {
+		materialExameDAO.updateMaterialExame(materialExame);
 	}
 
 	public void remover(Integer id) throws SQLException {

@@ -16,8 +16,8 @@ public class ServicoPaciente {
 		return pacienteDAO.findById(id);
 	}
 
-	public void update(Paciente Paciente) throws SQLException {
-		pacienteDAO.updatePaciente(Paciente);
+	public void update(Paciente paciente) throws SQLException {
+		pacienteDAO.updatePaciente(paciente);
 	}
 
 	public void remover(Integer id) throws SQLException {

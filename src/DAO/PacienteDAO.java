@@ -10,7 +10,6 @@ import java.util.Date;
 import java.util.List;
 
 public class PacienteDAO extends ConexaoDB {
-	
 	private static final String INSERT_PACIENTE_SQL = "INSERT INTO PACIENTE (NOME, DT_NASCIMENTO) VALUES (?, ?);";
 	private static final String SELECT_PACIENTE_BY_ID = "SELECT id, NOME, dt_nascimento FROM PACIENTE WHERE id = ?";
 	private static final String SELECT_ALL_PACIENTE = "SELECT * FROM PACIENTE;";
