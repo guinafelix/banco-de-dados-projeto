@@ -10,6 +10,12 @@ public class Especialidade extends GenericModel {
 		super.setId(id);
 	}
 
+	public Especialidade(String descricao, String observacao) {
+		super();
+		this.descricao = descricao;
+		this.observacao = observacao;
+	}
+
 	public String getDescricao() {
 		return descricao;
 	}

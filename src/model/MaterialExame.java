@@ -10,6 +10,12 @@ public class MaterialExame extends GenericModel {
 		super.setId(id);;
 	}
 
+	public MaterialExame(String material, String observacao) {
+		super();
+		this.material = material;
+		this.observacao = observacao;
+	}
+
 	public String getMaterial() {
 		return material;
 	}

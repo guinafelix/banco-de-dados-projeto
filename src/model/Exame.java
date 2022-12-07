@@ -14,6 +14,14 @@ public class Exame extends GenericModel {
 		super.setId(id);
 	}
 
+	public Exame(String descricao, String metodo, int material_exame_id, int tipo_exame_id) {
+		super();
+		this.descricao = descricao;
+		this.metodo = metodo;
+		this.material_exame_id = material_exame_id;
+		this.tipo_exame_id = tipo_exame_id;
+	}
+
 	public String getDescricao() {
 		return descricao;
 	}

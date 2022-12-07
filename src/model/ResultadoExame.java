@@ -16,6 +16,14 @@ public class ResultadoExame extends GenericModel {
 		super.setId(id);
 	}
 
+	public ResultadoExame(Date dt_exame, String valor, int composicao_id, int laudo_id) {
+		super();
+		this.dt_exame = dt_exame;
+		this.valor = valor;
+		this.composicao_id = composicao_id;
+		this.laudo_id = laudo_id;
+	}
+
 	public Date getDt_exame() {
 		return dt_exame;
 	}

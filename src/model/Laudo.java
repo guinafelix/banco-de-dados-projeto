@@ -13,6 +13,14 @@ public class Laudo extends GenericModel {
 		this.solicitacao_exame_id = solicitacao_exame_id;
 		super.setId(id);
 	}
+	
+	public Laudo(String assinaturaDigital, String dt_resultado, String codigo, int solicitacao_exame_id) {
+		super();
+		this.assinaturaDigital = assinaturaDigital;
+		this.dt_resultado = dt_resultado;
+		this.codigo = codigo;
+		this.solicitacao_exame_id = solicitacao_exame_id;
+	}
 
 	public String getAssinaturaDigital() {
 		return assinaturaDigital;

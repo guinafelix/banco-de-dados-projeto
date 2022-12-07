@@ -11,11 +11,15 @@ public class Medico extends GenericModel {
 		super.setId(id);;
 	}
 
+	public Medico(String nome, String crm) {
+		super();
+		this.nome = nome;
+		this.crm = crm;
+	}
 
 	public String getNome() {
 		return nome;
 	}
-
 
 	public void setNome(String nome) {
 		this.nome = nome;
@@ -35,8 +39,8 @@ public class Medico extends GenericModel {
 	public String toString() {
 		return "Medico {"
 				+ "id= " + this.getId() + "\'"
-						+ "Nome: " + this.nome + "\'" +
-						"CRM: " + this.getNome();
+						+ "Nome: " + nome + "\'" +
+						"CRM: " + crm;
 	}
 	
 }

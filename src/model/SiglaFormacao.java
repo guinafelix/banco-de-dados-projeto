@@ -7,6 +7,11 @@ public class SiglaFormacao extends GenericModel {
 		this.sigla = sigla;
 		super.setId(id);;
 	}
+	
+	public SiglaFormacao(String sigla) {
+		super();
+		this.sigla = sigla;
+	}
 
 	public String getSigla() {
 		return sigla;
@@ -22,5 +27,4 @@ public class SiglaFormacao extends GenericModel {
 				+ "id= " + this.getId() + "\'"
 						+ "Sigla: " + this.sigla;
 	}
-	
 }

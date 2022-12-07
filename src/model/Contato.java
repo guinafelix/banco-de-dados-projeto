@@ -10,6 +10,12 @@ public class Contato extends GenericModel{
 		super.setId(id);;
 	}
 
+	public Contato(String telefone, int laboratorio_id) {
+		super();
+		this.telefone = telefone;
+		this.laboratorio_id = laboratorio_id;
+	}
+
 	public String getTelefone() {
 		return telefone;
 	}

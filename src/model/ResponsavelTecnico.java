@@ -14,6 +14,14 @@ public class ResponsavelTecnico extends GenericModel {
 		super.setId(id);
 	}
 	
+	public ResponsavelTecnico(String nome, String conselho, String formacao, int sigla_formacao_id) {
+		super();
+		this.nome = nome;
+		this.conselho = conselho;
+		this.formacao = formacao;
+		this.sigla_formacao_id = sigla_formacao_id;
+	}
+
 	public String getNome() {
 		return nome;
 	}

@@ -14,6 +14,13 @@ public class Paciente extends GenericModel {
 	}
 
 
+	public Paciente(String nome, Date dt_nascimento) {
+		super();
+		this.nome = nome;
+		this.dt_nascimento = dt_nascimento;
+	}
+
+
 	public String getNome() {
 		return nome;
 	}

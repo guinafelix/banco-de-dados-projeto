@@ -8,6 +8,12 @@ public class TipoExame extends GenericModel {
 		this.descricao = descricao;
 		this.observacao = observacao;
 		super.setId(id);
+	}	
+	
+	public TipoExame(String descricao, String observacao) {
+		super();
+		this.descricao = descricao;
+		this.observacao = observacao;
 	}
 
 	public String getDescricao() {

@@ -21,6 +21,18 @@ public class Endereco extends GenericModel {
 		super.setId(id);
 	}
 
+	public Endereco(String rua, String numero, String complemento, String bairro, String cep, String cidade,
+			int laboratorio_id) {
+		super();
+		this.rua = rua;
+		this.numero = numero;
+		this.complemento = complemento;
+		this.bairro = bairro;
+		this.cep = cep;
+		this.cidade = cidade;
+		this.laboratorio_id = laboratorio_id;
+	}
+
 	public String getRua() {
 		return rua;
 	}

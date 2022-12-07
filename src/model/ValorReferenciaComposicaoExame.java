@@ -16,6 +16,16 @@ public class ValorReferenciaComposicaoExame extends GenericModel {
 		this.unidade_medida_id = unidade_medida_id;
 		super.setId(id);
 	}
+	
+	public ValorReferenciaComposicaoExame(String valor_minimo, String valor_maximo, String limitador_minimo,
+			String limitador_maximo, int unidade_medida_id) {
+		super();
+		this.valor_minimo = valor_minimo;
+		this.valor_maximo = valor_maximo;
+		this.limitador_minimo = limitador_minimo;
+		this.limitador_maximo = limitador_maximo;
+		this.unidade_medida_id = unidade_medida_id;
+	}
 
 	public String getValor_minimo() {
 		return valor_minimo;

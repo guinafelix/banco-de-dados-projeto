@@ -12,6 +12,13 @@ public class Composicao extends GenericModel {
 		super.setId(id);;
 	}
 
+	public Composicao(int exame_id, int composicao_exame_id, int valor_referencia_composicao_exame_id) {
+		super();
+		this.exame_id = exame_id;
+		this.composicao_exame_id = composicao_exame_id;
+		this.valor_referencia_composicao_exame_id = valor_referencia_composicao_exame_id;
+	}
+
 	public int getExame_id() {
 		return exame_id;
 	}

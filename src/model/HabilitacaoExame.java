@@ -14,6 +14,14 @@ public class HabilitacaoExame extends GenericModel {
 		super.setId(id);
 	}
 	
+	public HabilitacaoExame(String observacao, double custo, int id_laboratorio, int tipo_exame_id) {
+		super();
+		this.observacao = observacao;
+		this.custo = custo;
+		this.id_laboratorio = id_laboratorio;
+		this.tipo_exame_id = tipo_exame_id;
+	}
+
 	public String getObservacao() {
 		return observacao;
 	}

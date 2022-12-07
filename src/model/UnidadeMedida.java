@@ -8,6 +8,11 @@ public class UnidadeMedida extends GenericModel {
 		super.setId(id);
 	}
 
+	public UnidadeMedida(String descricao) {
+		super();
+		this.descricao = descricao;
+	}
+
 	public String getDescricao() {
 		return descricao;
 	}

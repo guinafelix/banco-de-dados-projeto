@@ -15,6 +15,15 @@ public class Laboratorio extends GenericModel {
 		this.nomeFantasia = nomeFantasia;
 		super.setId(id);
 	}
+	
+	public Laboratorio(String descricao, String cnes, String cnpj, String crbm, String nomeFantasia) {
+		super();
+		this.descricao = descricao;
+		this.cnes = cnes;
+		this.cnpj = cnpj;
+		this.crbm = crbm;
+		this.nomeFantasia = nomeFantasia;
+	}
 
 	public String getDescricao() {
 		return descricao;
