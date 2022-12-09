@@ -12,12 +12,16 @@ public class ServicoMedico {
 		return medicoDAO.insert(entidade);
 	}
 
-	public Medico buscarPorId(Long id) {
+	public Medico buscarPorId(Integer id) {
 		return medicoDAO.findById(id);
 	}
 
 	public void update(Medico medico) throws SQLException {
 		medicoDAO.updateMedico(medico);
+	}
+
+	public void listarTodos() {
+		System.out.println(medicoDAO.selectAllMedicos());
 	}
 
 	public void remover(Integer id) throws SQLException {

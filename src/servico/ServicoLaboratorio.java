@@ -12,7 +12,7 @@ private LaboratorioDAO laboratorioDAO = new LaboratorioDAO();
 		return laboratorioDAO.insert(entidade);
 	}
 
-	public Laboratorio buscarPorId(Long id) {
+	public Laboratorio buscarPorId(Integer id) {
 		return laboratorioDAO.findById(id);
 	}
 

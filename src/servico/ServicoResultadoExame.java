@@ -7,12 +7,12 @@ import model.ResultadoExame;
 
 public class ServicoResultadoExame {
 	private ResultadoExameDAO resultadoExameDAO = new ResultadoExameDAO();
-	
+
 	public ResultadoExame salvar(ResultadoExame entidade) {
 		return resultadoExameDAO.insert(entidade);
 	}
 
-	public ResultadoExame buscarPorId(Long id) {
+	public ResultadoExame buscarPorId(Integer id) {
 		return resultadoExameDAO.findById(id);
 	}
 
@@ -23,4 +23,4 @@ public class ServicoResultadoExame {
 	public void remover(Integer id) throws SQLException {
 		resultadoExameDAO.deleteResultadoExame(id);
 	}
-}	
+}

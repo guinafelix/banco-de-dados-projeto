@@ -13,7 +13,7 @@ public class ServicoMaterialExame {
 		return materialExameDAO.insert(entidade);
 	}
 
-	public MaterialExame buscarPorId(Long id) {
+	public MaterialExame buscarPorId(Integer id) {
 		return materialExameDAO.findById(id);
 	}
 

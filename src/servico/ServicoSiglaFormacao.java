@@ -12,7 +12,7 @@ public class ServicoSiglaFormacao {
 		return siglaFormacaoDAO.insert(entidade);
 	}
 
-	public SiglaFormacao buscarPorId(Long id) {
+	public SiglaFormacao buscarPorId(Integer id) {
 		return siglaFormacaoDAO.findById(id);
 	}
 

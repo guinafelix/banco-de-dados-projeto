@@ -12,7 +12,7 @@ public class ServicoPaciente {
 		return pacienteDAO.insert(entidade);
 	}
 
-	public Paciente buscarPorId(Long id) {
+	public Paciente buscarPorId(Integer id) {
 		return pacienteDAO.findById(id);
 	}
 

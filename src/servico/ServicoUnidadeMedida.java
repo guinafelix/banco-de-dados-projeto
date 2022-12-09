@@ -13,7 +13,7 @@ public class ServicoUnidadeMedida {
 		return unidadeMedidaDAO.insert(entidade);
 	}
 
-	public UnidadeMedida buscarPorId(Long id) {
+	public UnidadeMedida buscarPorId(Integer id) {
 		return unidadeMedidaDAO.findById(id);
 	}
 
