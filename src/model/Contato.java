@@ -31,4 +31,11 @@ public class Contato extends GenericModel{
 	public void setLaboratorio_id(int laboratorio_id) {
 		this.laboratorio_id = laboratorio_id;
 	}
+
+	@Override
+	public String toString() {
+		return "Contato: {" +
+				"telefone: " + telefone +
+				"laboratorio_id: " + laboratorio_id;
+	}
 }

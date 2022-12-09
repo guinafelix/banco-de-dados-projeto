@@ -68,5 +68,16 @@ public class SolicitacaoExame extends GenericModel {
 	public void setExame_id(int exame_id) {
 		this.exame_id = exame_id;
 	}
+
+	@Override
+	public String toString() {
+		return "SolicitacaoExame{" +
+				"nm_prescrito='" + nm_prescrito + '\'' +
+				", dt_solicitacao=" + dt_solicitacao +
+				", consulta_medica_id=" + consulta_medica_id +
+				", habilitacao_exame_id=" + habilitacao_exame_id +
+				", exame_id=" + exame_id +
+				'}';
+	}
 }
 

@@ -66,6 +66,15 @@ public class ValorReferenciaComposicaoExame extends GenericModel {
 	public void setUnidade_medida_id(int unidade_medida_id) {
 		this.unidade_medida_id = unidade_medida_id;
 	}
-	
-	
+
+	@Override
+	public String toString() {
+		return "ValorReferenciaComposicaoExame{" +
+				"valor_minimo='" + valor_minimo + '\'' +
+				", valor_maximo='" + valor_maximo + '\'' +
+				", limitador_minimo='" + limitador_minimo + '\'' +
+				", limitador_maximo='" + limitador_maximo + '\'' +
+				", unidade_medida_id=" + unidade_medida_id +
+				'}';
+	}
 }

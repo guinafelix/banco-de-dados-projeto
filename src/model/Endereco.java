@@ -88,4 +88,16 @@ public class Endereco extends GenericModel {
 	public void setLaboratorio_id(int laboratorio_id) {
 		this.laboratorio_id = laboratorio_id;
 	}
+
+	@Override
+	public String toString(){
+		return "Endereco: {" +
+				"rua: " + rua +
+				"numero: " + numero +
+				"complemento: " + complemento +
+				"bairro: " + bairro +
+				"cep: " + cep +
+				"cidade: " + cidade +
+				"laboratorio_id: " + laboratorio_id;
+	}
 }

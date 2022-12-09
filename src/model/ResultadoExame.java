@@ -55,5 +55,14 @@ public class ResultadoExame extends GenericModel {
 	public void setLaudo_id(int laudo_id) {
 		this.laudo_id = laudo_id;
 	}
+
+	@Override
+	public String toString(){
+		return "ResultadoExame: " +
+				"dt_exame: " + dt_exame +
+				"valor: " + valor +
+				"composicao_id: " + composicao_id +
+				"laudo_id: " + laudo_id;
+	}
 }
 

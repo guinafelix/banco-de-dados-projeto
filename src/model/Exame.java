@@ -53,4 +53,13 @@ public class Exame extends GenericModel {
 	public void setTipo_exame_id(int tipo_exame_id) {
 		this.tipo_exame_id = tipo_exame_id;
 	}
+
+	@Override
+	public String toString(){
+		return "Exame: { " +
+				"descricao: " + descricao +
+				"metodo: " + metodo +
+				"material_exame_id" + material_exame_id +
+				"tipo_exame_id: " + tipo_exame_id;
+	}
 }

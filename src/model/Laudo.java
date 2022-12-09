@@ -53,4 +53,13 @@ public class Laudo extends GenericModel {
 	public void setSolicitacao_exame_id(int solicitacao_exame_id) {
 		this.solicitacao_exame_id = solicitacao_exame_id;
 	}
+
+	@Override
+	public String toString() {
+		return "Laudo:  { "+
+				"assinaturaDigital: " + assinaturaDigital +
+				"dt_resultado: " + dt_resultado +
+				"codigo: " + codigo +
+				"solicitacao_exame_id: " + solicitacao_exame_id;
+	}
 }

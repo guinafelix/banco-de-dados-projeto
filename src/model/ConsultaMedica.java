@@ -57,4 +57,13 @@ public class ConsultaMedica extends GenericModel {
 	public void setMedico_id(int medico_id) {
 		this.medico_id = medico_id;
 	}
+
+	@Override
+	public String toString(){
+		return "ConsultaMedica: {" +
+				"dt_consulta: " + dt_consulta +
+				"nm_atendimento: " + nm_atendimento +
+				"paciente_id: " + paciente_id +
+				"medico_id: " + medico_id;
+	}
 }

@@ -20,11 +20,11 @@ public class UnidadeMedida extends GenericModel {
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
-	
+
 	@Override
 	public String toString() {
-		return "UnidadeMedida {"
-				+ "id= " + this.getId() + "\'"
-						+ "descricao: " + descricao;
+		return "UnidadeMedida{" +
+				"descricao='" + descricao + '\'' +
+				'}';
 	}
 }

@@ -42,4 +42,12 @@ public class Composicao extends GenericModel {
 	public void setValor_referencia_composicao_exame_id(int valor_referencia_composicao_exame_id) {
 		this.valor_referencia_composicao_exame_id = valor_referencia_composicao_exame_id;
 	}
+
+	@Override
+	public String toString(){
+		return "Composiçaõ : { " +
+				"exame_id: " + exame_id +
+				"composicao_exame_id: " + composicao_exame_id +
+				"valor_referencia_composicao_exame_id: " + valor_referencia_composicao_exame_id;
+	}
 }
