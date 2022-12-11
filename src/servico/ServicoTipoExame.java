@@ -1,8 +1,10 @@
 package servico;
 
 import java.sql.SQLException;
+import java.util.List;
 
 import DAO.TipoExameDAO;
+import model.Contato;
 import model.TipoExame;
 
 public class ServicoTipoExame {
@@ -18,6 +20,10 @@ public class ServicoTipoExame {
 
 	public void update(TipoExame entidade) throws SQLException {
 		tipoExameDAO.updateTipoExame(entidade);
+	}
+
+	public List<TipoExame> listarTodos() {
+		return tipoExameDAO.selectAllTipoExames();
 	}
 
 	public void remover(Integer id) throws SQLException {

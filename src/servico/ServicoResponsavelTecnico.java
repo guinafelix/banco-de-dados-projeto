@@ -1,8 +1,10 @@
 package servico;
 
 import java.sql.SQLException;
+import java.util.List;
 
 import DAO.ResponsavelTecnicoDAO;
+import model.Contato;
 import model.ResponsavelTecnico;
 
 public class ServicoResponsavelTecnico {
@@ -18,6 +20,10 @@ public class ServicoResponsavelTecnico {
 
 	public void update(ResponsavelTecnico responsavelTecnico) throws SQLException {
 		responsavelTecnicoDAO.updateResponsavelTecnico(responsavelTecnico);
+	}
+
+	public List<ResponsavelTecnico> listarTodos() {
+		return responsavelTecnicoDAO.selectAllResponsavelTecnicos();
 	}
 
 	public void remover(Integer id) throws SQLException {

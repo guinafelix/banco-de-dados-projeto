@@ -1,9 +1,11 @@
 package servico;
 
 import DAO.ResponsavelTecnicoHasLaboratorioDAO;
+import model.Contato;
 import model.ResponsavelTecnicoHasLaboratorio;
 
 import java.sql.SQLException;
+import java.util.List;
 
 public class ServicoResponsavelTecnicoHasLaboratorio {
     private ResponsavelTecnicoHasLaboratorioDAO responsavelTecnicoHasLaboratorioDAO = new ResponsavelTecnicoHasLaboratorioDAO();
@@ -18,6 +20,10 @@ public class ServicoResponsavelTecnicoHasLaboratorio {
 
     public void update(ResponsavelTecnicoHasLaboratorio entidade) throws SQLException {
         responsavelTecnicoHasLaboratorioDAO.updateResponsavelTecnicoHasLaboratorio(entidade);
+    }
+
+    public List<ResponsavelTecnicoHasLaboratorio> listarTodos() {
+        return responsavelTecnicoHasLaboratorioDAO.selectAllResponsavelTecnicoHasLaboratorios();
     }
 
     public void remover(Integer id) throws SQLException {

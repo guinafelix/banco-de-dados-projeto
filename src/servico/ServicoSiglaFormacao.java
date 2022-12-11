@@ -1,8 +1,10 @@
 package servico;
 
 import java.sql.SQLException;
+import java.util.List;
 
 import DAO.SiglaFormacaoDAO;
+import model.Contato;
 import model.SiglaFormacao;
 
 public class ServicoSiglaFormacao {
@@ -18,6 +20,10 @@ public class ServicoSiglaFormacao {
 
 	public void update(SiglaFormacao entidade) throws SQLException {
 		siglaFormacaoDAO.updateSiglaFormacao(entidade);
+	}
+
+	public List<SiglaFormacao> listarTodos() {
+		return siglaFormacaoDAO.selectAllSiglaFormacaos();
 	}
 
 	public void remover(Integer id) throws SQLException {

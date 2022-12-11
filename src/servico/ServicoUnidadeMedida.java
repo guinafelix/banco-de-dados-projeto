@@ -1,8 +1,10 @@
 package servico;
 
 import java.sql.SQLException;
+import java.util.List;
 
 import DAO.UnidadeMedidaDAO;
+import model.Contato;
 import model.UnidadeMedida;
 
 
@@ -19,6 +21,10 @@ public class ServicoUnidadeMedida {
 
 	public void update(UnidadeMedida unidadeMedida) throws SQLException {
 		unidadeMedidaDAO.updateUnidadeMedida(unidadeMedida);
+	}
+
+	public List<UnidadeMedida> listarTodos() {
+		return unidadeMedidaDAO.selectAllUnidadeMedidas();
 	}
 
 	public void remover(Integer id) throws SQLException {

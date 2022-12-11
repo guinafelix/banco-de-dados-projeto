@@ -1,8 +1,10 @@
 package servico;
 
 import java.sql.SQLException;
+import java.util.List;
 
 import DAO.ValorReferenciaComposicaoExameDAO;
+import model.Contato;
 import model.ValorReferenciaComposicaoExame;
 
 public class ServicoValorReferenciaComposicaoExame {
@@ -18,6 +20,10 @@ public class ServicoValorReferenciaComposicaoExame {
 
 	public void update(ValorReferenciaComposicaoExame entidade) throws SQLException {
 		valorReferenciaComposicaoExameDAO.updateValorReferenciaComposicaoExame(entidade);
+	}
+
+	public List<ValorReferenciaComposicaoExame> listarTodos() {
+		return valorReferenciaComposicaoExameDAO.selectAllValorReferenciaComposicaoExames();
 	}
 
 	public void remover(Integer id) throws SQLException {

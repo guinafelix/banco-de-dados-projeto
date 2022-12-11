@@ -1,8 +1,10 @@
 package servico;
 
 import java.sql.SQLException;
+import java.util.List;
 
 import DAO.MedicoDAO;
+import model.Contato;
 import model.Medico;
 
 public class ServicoMedico {
@@ -20,8 +22,8 @@ public class ServicoMedico {
 		medicoDAO.updateMedico(medico);
 	}
 
-	public void listarTodos() {
-		System.out.println(medicoDAO.selectAllMedicos());
+	public List<Medico> listarTodos() {
+		return medicoDAO.selectAllMedicos();
 	}
 
 	public void remover(Integer id) throws SQLException {

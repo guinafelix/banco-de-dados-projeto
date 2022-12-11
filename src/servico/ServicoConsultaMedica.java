@@ -1,8 +1,10 @@
 package servico;
 
 import java.sql.SQLException;
+import java.util.List;
 
 import DAO.ConsultaMedicaDAO;
+import model.ComposicaoExame;
 import model.ConsultaMedica;
 
 public class ServicoConsultaMedica {
@@ -18,6 +20,10 @@ public class ServicoConsultaMedica {
 
 	public void update(ConsultaMedica entidade) throws SQLException {
 		consultaMedicaDAO.updateConsultaMedica(entidade);
+	}
+
+	public List<ConsultaMedica> listarTodos() {
+		return consultaMedicaDAO.selectAllConsultaMedicas();
 	}
 
 	public void remover(Integer id) throws SQLException {
