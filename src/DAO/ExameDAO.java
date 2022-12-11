@@ -69,7 +69,7 @@ public class ExameDAO extends ConexaoDB {
 						rs.getLong("id"), 
 						rs.getString("descricao"),
 						rs.getString("metodo "),
-						rs.getInt("  material_exame_i"),
+						rs.getInt("  material_exame_id"),
 						rs.getInt("tipo_exame_id"));
 			}
 		} catch (SQLException e) {
@@ -112,7 +112,7 @@ public class ExameDAO extends ConexaoDB {
 				long id = rs.getLong("id");
 				String descricao = rs.getString("descricao");
 				String metodo = rs.getString("metodo");
-				int materialExameId = rs.getInt("material_exame_i");
+				int materialExameId = rs.getInt("material_exame_id");
 				int tipoExameId = rs.getInt("tipo_exame_id");
 				
 				entidades.add(new Exame(id, descricao, metodo, materialExameId, tipoExameId));
