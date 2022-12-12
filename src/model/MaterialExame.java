@@ -31,10 +31,12 @@ public class MaterialExame extends GenericModel {
 	public void setObservacao(String observacao) {
 		this.observacao = observacao;
 	}
-	
+
 	@Override
 	public String toString() {
-		return "Material Exame [material=" + material + ", observacao=" + observacao + "]";
+		return "MaterialExame{" +
+				"material='" + material + '\'' +
+				", observacao='" + observacao + '\'' +
+				'}';
 	}
-	
 }
