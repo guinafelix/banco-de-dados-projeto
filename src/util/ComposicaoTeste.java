@@ -14,9 +14,9 @@ public class ComposicaoTeste {
     private static ServicoValorReferenciaComposicaoExame servicoValorReferenciaComposicaoExame = new ServicoValorReferenciaComposicaoExame();
 
     public static void main(String[] args) {
-        MaterialExame matExame = new MaterialExame("mat", "obs");
-        servicoMaterialExame.salvar(matExame);
-        MaterialExame materialExame = servicoMaterialExame.buscarPorId(1);
+        //MaterialExame matExame = new MaterialExame("mat", "obs");
+        //servicoMaterialExame.salvar(matExame);
+      //  MaterialExame materialExame = servicoMaterialExame.buscarPorId(1);
 
         //TipoExame tipoExame = new TipoExame("aaaa", "observacao");
         TipoExame tipoExame = servicoTipoExame.buscarPorId(1);
