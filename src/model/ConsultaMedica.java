@@ -15,6 +15,14 @@ public class ConsultaMedica extends GenericModel {
 		this.medico_id = medico_id;
 	}
 
+	public ConsultaMedica(Long id, Date dt_consulta, String nm_atendimento, Paciente paciente_id, Medico medico_id) {
+		this.dt_consulta = dt_consulta;
+		this.nm_atendimento = nm_atendimento;
+		this.paciente_id = paciente_id;
+		this.medico_id = medico_id;
+		super.setId(id);
+	}
+
 	public Date getDt_consulta() {
 		return dt_consulta;
 	}
@@ -44,13 +52,6 @@ public class ConsultaMedica extends GenericModel {
 	}
 
 	public void setMedico_id(Medico medico_id) {
-		this.medico_id = medico_id;
-	}
-
-	public ConsultaMedica(Long id, Date dt_consulta, String nm_atendimento, Paciente paciente_id, Medico medico_id) {
-		this.dt_consulta = dt_consulta;
-		this.nm_atendimento = nm_atendimento;
-		this.paciente_id = paciente_id;
 		this.medico_id = medico_id;
 	}
 
