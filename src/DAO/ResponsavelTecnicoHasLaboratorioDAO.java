@@ -14,7 +14,7 @@ public class ResponsavelTecnicoHasLaboratorioDAO extends ConexaoDB {
     private static ServicoResponsavelTecnico servicoResponsavelTecnico = new ServicoResponsavelTecnico();
     private static ServicoLaboratorio servicoLaboratorio = new ServicoLaboratorio();
     private static final String INSERT_RESPONSAVEL_TECNICO_HAS_LABORATORIO_SQL = "INSERT INTO responsavel_tecnico_has_laboratorio (responsavel_tecnico_id, laboratorio_id) VALUES (?, ?);";
-    private static final String SELECT_RESPONSAVEL_TECNICO_HAS_LABORATORIO_BY_ID = "SELECT id, responsavel_tecnico_id, laboratorio_id FROM responsavel_tecnico_has_laboratorio WHERE id = ?";
+    private static final String SELECT_RESPONSAVEL_TECNICO_HAS_LABORATORIO_BY_RESPONSAVEL_TECNICO_ID = "SELECT responsavel_tecnico_id, laboratorio_id FROM responsavel_tecnico_has_laboratorio WHERE responsavel_tecnico_id = ?";
     private static final String SELECT_ALL_RESPONSAVEL_TECNICO_HAS_LABORATORIO = "SELECT * FROM responsavel_tecnico_has_laboratorio;";
     private static final String DELETE_RESPONSAVEL_TECNICO_HAS_LABORATORIO_SQL = "DELETE FROM responsavel_tecnico_has_laboratorio WHERE id = ?;";
     private static final String UPDATE_RESPONSAVEL_TECNICO_HAS_LABORATORIO_SQL = "UPDATE responsavel_tecnico_has_laboratorio SET responsavel_tecnico_id = ?, laboratorio_id = ? WHERE id = ?;";
@@ -59,26 +59,26 @@ public class ResponsavelTecnicoHasLaboratorioDAO extends ConexaoDB {
         return entidade;
     }
 
-    public ResponsavelTecnicoHasLaboratorio findById(long id) {
-        ResponsavelTecnicoHasLaboratorio entidade = null;
-        try (PreparedStatement preparedStatement = prepararSQL(SELECT_RESPONSAVEL_TECNICO_HAS_LABORATORIO_BY_ID)) {
+    public List<ResponsavelTecnicoHasLaboratorio> finByResponsavelTecnicoId(long id) {
+        List<ResponsavelTecnicoHasLaboratorio> entidades = new ArrayList<>();
+        try (PreparedStatement preparedStatement = prepararSQL(SELECT_RESPONSAVEL_TECNICO_HAS_LABORATORIO_BY_RESPONSAVEL_TECNICO_ID)) {
             preparedStatement.setLong(1, id);
             ResultSet rs = preparedStatement.executeQuery();
 
             while (rs.next()) {
                 int responsavel_tecnico_id = rs.getInt("responsavel_tecnico_id");
                 int laboratorioId = rs.getInt("laboratorio_id");
-                entidade = new ResponsavelTecnicoHasLaboratorio(
+                entidades.add(new ResponsavelTecnicoHasLaboratorio(
                         id,
                         servicoResponsavelTecnico.buscarPorId(responsavel_tecnico_id),
-                        servicoLaboratorio.buscarPorId(laboratorioId));
+                        servicoLaboratorio.buscarPorId(laboratorioId)));
             }
         } catch (SQLException e) {
             printSQLException(e);
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
-        return entidade;
+        return entidades;
     }
 
     public List<ResponsavelTecnicoHasLaboratorio> selectAllResponsavelTecnicoHasLaboratorios() {
@@ -87,11 +87,9 @@ public class ResponsavelTecnicoHasLaboratorioDAO extends ConexaoDB {
             ResultSet rs = preparedStatement.executeQuery();
 
             while (rs.next()) {
-                long id = rs.getLong("id");
                 int responsavel_tecnico_id = rs.getInt("responsavel_tecnico_id");
                 int laboratorioId = rs.getInt("laboratorio_id");
                 entidades.add(new ResponsavelTecnicoHasLaboratorio(
-                        id,
                         servicoResponsavelTecnico.buscarPorId(responsavel_tecnico_id),
                         servicoLaboratorio.buscarPorId(laboratorioId)));
             }

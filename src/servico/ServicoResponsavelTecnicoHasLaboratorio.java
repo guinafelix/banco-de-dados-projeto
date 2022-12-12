@@ -14,8 +14,8 @@ public class ServicoResponsavelTecnicoHasLaboratorio {
         return responsavelTecnicoHasLaboratorioDAO.insert(entidade);
     }
 
-    public ResponsavelTecnicoHasLaboratorio buscarPorId(Integer id) {
-        return responsavelTecnicoHasLaboratorioDAO.findById(id);
+    public List<ResponsavelTecnicoHasLaboratorio> buscarPorResponsavelTecnicoId(Integer id) {
+        return responsavelTecnicoHasLaboratorioDAO.finByResponsavelTecnicoId(id);
     }
 
     public void update(ResponsavelTecnicoHasLaboratorio entidade) throws SQLException {
