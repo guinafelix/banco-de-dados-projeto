@@ -12,7 +12,7 @@ import servico.ServicoSiglaFormacao;
 public class ResponsavelTecnicoDAO extends ConexaoDB {
 	private static ServicoSiglaFormacao servicoSiglaFormacao = new ServicoSiglaFormacao();
 	private static final String INSERT_RESPONSAVEL_TECNICO_SQL = "INSERT INTO RESPONSAVEL_TECNICO (NOME, CONSELHO, FORMACAO, SIGLA_FORMACAO_ID) VALUES (?, ?, ?, ?);";
-	private static final String SELECT_RESPONSAVEL_TECNICO_BY_ID = "SELECT id, NOME, conselho FROM RESPONSAVEL_TECNICO WHERE id = ?";
+	private static final String SELECT_RESPONSAVEL_TECNICO_BY_ID = "SELECT id, NOME, conselho, formacao, sigla_formacao_id FROM RESPONSAVEL_TECNICO WHERE id = ?";
 	private static final String SELECT_ALL_RESPONSAVEL_TECNICO = "SELECT * FROM RESPONSAVEL_TECNICO;";
 	private static final String DELETE_RESPONSAVEL_TECNICO_SQL = "DELETE FROM RESPONSAVEL_TECNICO WHERE id = ?;";
 	private static final String UPDATE_RESPONSAVEL_TECNICO_SQL = "UPDATE RESPONSAVEL_TECNICO SET NOME = ?, conselho = ?, formacao = ?, sigla_formacao_id = ? WHERE id = ?;";

@@ -18,6 +18,7 @@ public class ResponsavelTecnico extends GenericModel {
 		this.conselho = conselho;
 		this.formacao = formacao;
 		this.sigla_formacao_id = sigla_formacao_id;
+		super.setId(id);
 	}
 
 	public String getNome() {
