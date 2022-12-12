@@ -6,8 +6,8 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public class ConexaoDB {
-    //TODO: criar variáveis de ambiente para os dados de acesso ao banco.
-    private static final String dbName = "gfelix20211045050306";
+    //TODO: criar variï¿½veis de ambiente para os dados de acesso ao banco.
+    private static final String dbName = "";
     private static final String dbURL = "jdbc:postgresql://200.17.32.221:5432/";
     private static final String username = "postgres";
     private static final String password = "postgres";
@@ -17,7 +17,7 @@ public class ConexaoDB {
         Connection conexaoDB = DriverManager.getConnection(dbURL.concat(dbName), username, password);
 
         if (conexaoDB != null) {
-            System.out.println("Conexão com o banco de dados gerada com sucesso! ");
+            System.out.println("Conexï¿½o com o banco de dados gerada com sucesso! ");
             return conexaoDB;
         } else {
             throw new RuntimeException("Ops! Erro ao conectar com o banco de dados. :(");
