@@ -8,13 +8,17 @@ import java.util.Date;
 import java.util.List;
 
 import model.ConsultaMedica;
+import servico.ServicoMedico;
+import servico.ServicoPaciente;
 
 public class ConsultaMedicaDAO extends ConexaoDB {
+	private static ServicoMedico servicoMedico = new ServicoMedico();
+	private static ServicoPaciente servicoPaciente = new ServicoPaciente();
+
 	private static final String INSERT_CONSULTA_MEDICA_SQL = "INSERT INTO CONSULTA_MEDICA (DT_CONSULTA, NM_ATENDIMENTO, PACIENTE_ID, MEDICO_ID) VALUES (?, ?, ?, ?);";
 	private static final String SELECT_CONSULTA_MEDICA_BY_ID = "SELECT id, DT_CONSULTA, NM_ATENDIMENTO, PACIENTE_ID, MEDICO_ID FROM CONSULTA_MEDICA WHERE id = ?";
 	private static final String SELECT_ALL_CONSULTA_MEDICA = "SELECT * FROM CONSULTA_MEDICA;";
 	private static final String DELETE_CONSULTA_MEDICA_SQL = "DELETE FROM CONSULTA_MEDICA WHERE id = ?;";
-	private static final String BUSCAR_POR_NOME_CONSULTA_MEDICA_SQL = "SELECT FROM CONSULTA_MEDICA WHERE NOME = ?;";
 	private static final String UPDATE_CONSULTA_MEDICA_SQL = "UPDATE CONSULTA_MEDICA SET DT_CONSULTA = ?, NM_ATENDIMENTO = ?, PACIENTE_ID = ?, MEDICO_ID = ? WHERE id = ?;";
 	private static final String TOTAL = "SELECT count(1) FROM CONSULTA_MEDICA;";
     
@@ -42,37 +46,14 @@ public class ConsultaMedicaDAO extends ConexaoDB {
 			java.sql.Date sqlDate = new java.sql.Date(entidade.getDt_consulta().getTime());
 			preparedStatement.setDate(1, sqlDate) ;
 			preparedStatement.setString(2, entidade.getNm_atendimento());
-			preparedStatement.setInt(3, entidade.getPaciente_id());
-			preparedStatement.setInt(4, entidade.getMedico_id());
+			preparedStatement.setLong(3, entidade.getPaciente_id().getId());
+			preparedStatement.setLong(4, entidade.getMedico_id().getId());
 
 			preparedStatement.executeUpdate();
 
 			ResultSet result = preparedStatement.getGeneratedKeys();
 			if (result.next()) {
 				entidade.setId(result.getLong(1));
-			}
-		} catch (SQLException e) {
-			printSQLException(e);
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException(e);
-		}
-
-		return entidade;
-	}
-    
-    public ConsultaMedica findByNmAtendimento(String nmAtendimento) {
-		ConsultaMedica entidade = null;
-		try (PreparedStatement preparedStatement = prepararSQL( BUSCAR_POR_NOME_CONSULTA_MEDICA_SQL)) {
-			preparedStatement.setString(1, nmAtendimento);
-			ResultSet rs = preparedStatement.executeQuery();
-
-			while (rs.next()) {
-				entidade = new ConsultaMedica(
-						rs.getLong("id"),
-						rs.getDate("dt_consulta"),
-						rs.getString("nm_atendimento"),
-						rs.getInt("paciente_id"),
-						rs.getInt("medico_id"));
 			}
 		} catch (SQLException e) {
 			printSQLException(e);
@@ -94,7 +75,11 @@ public class ConsultaMedicaDAO extends ConexaoDB {
 				String nmAtendimento = rs.getString("nm_atendimento");
 				int pacienteId = rs.getInt("paciente_id");
 				int medicoId = rs.getInt("medico_id");
-				entidade = new ConsultaMedica(id, dtConsulta, nmAtendimento, pacienteId, medicoId);
+				entidade = new ConsultaMedica(
+						id, dtConsulta,
+						nmAtendimento,
+						servicoPaciente.buscarPorId(pacienteId),
+						servicoMedico.buscarPorId(medicoId));
 			}
 		} catch (SQLException e) {
 			printSQLException(e);
@@ -115,7 +100,11 @@ public class ConsultaMedicaDAO extends ConexaoDB {
 				String nmAtendimento = rs.getString("nm_atendimento");
 				int pacienteId = rs.getInt("paciente_id");
 				int medicoId = rs.getInt("medico_id");
-				entidades.add(new ConsultaMedica(id, dtConsulta, nmAtendimento, pacienteId, medicoId));
+				entidades.add(new ConsultaMedica(
+						id, dtConsulta,
+						nmAtendimento,
+						servicoPaciente.buscarPorId(pacienteId),
+						servicoMedico.buscarPorId(medicoId)));
 			}
 		} catch (SQLException e) {
 			printSQLException(e);
@@ -140,10 +129,11 @@ public class ConsultaMedicaDAO extends ConexaoDB {
 			java.sql.Date sqlDate = new java.sql.Date(entidade.getDt_consulta().getTime());
 			statement.setDate(1, sqlDate) ;
 			statement.setString(2, entidade.getNm_atendimento());
-			statement.setInt(3, entidade.getPaciente_id());
-			statement.setInt(4, entidade.getMedico_id());
+			statement.setLong(3, entidade.getPaciente_id().getId());
+			statement.setLong(4, entidade.getMedico_id().getId());
 			statement.setLong(5, entidade.getId());
 
+			statement.executeUpdate();
 		} catch (ClassNotFoundException e) {
 			throw new RuntimeException(e);
 		}

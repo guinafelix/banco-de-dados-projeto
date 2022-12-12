@@ -7,13 +7,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.Contato;
+import servico.ServicoLaboratorio;
 
 public class ContatoDAO extends ConexaoDB {
+	private static ServicoLaboratorio servicoLaboratorio = new ServicoLaboratorio();
 	private static final String INSERT_CONTATO_SQL = "INSERT INTO contato (telefone, laboratorio_id) VALUES (?, ?);";
 	private static final String SELECT_CONTATO_BY_ID = "SELECT id, telefone, laboratorio_id FROM contato WHERE id = ?";
 	private static final String SELECT_ALL_CONTATO = "SELECT * FROM contato;";
-	private static final String DELETE_CONTATO_SQL = "DELETE FROM contato WHERE id = ?;";
-	private static final String BUSCAR_POR_TELEFONE_CONTATO_SQL = "SELECT FROM contato WHERE telefone = ?;";
+	private static final String DELETE_CONTATO_SQL = "DELETE FROM contato WHERE id = ?;";private static final String BUSCAR_POR_TELEFONE_CONTATO_SQL = "SELECT FROM contato WHERE telefone = ?;";
 	private static final String UPDATE_CONTATO_SQL = "UPDATE contato SET telefone = ?, laboratorio_id = ? WHERE id = ?;";
 	private static final String TOTAL = "SELECT count(1) FROM contato;";
 
@@ -39,30 +40,13 @@ public class ContatoDAO extends ConexaoDB {
 				java.sql.Statement.RETURN_GENERATED_KEYS)) {
 
 			preparedStatement.setString(1, entidade.getTelefone());
-			preparedStatement.setInt(2, entidade.getLaboratorio_id());
+			preparedStatement.setLong(2, entidade.getLaboratorio_id().getId());
 
 			preparedStatement.executeUpdate();
 
 			ResultSet result = preparedStatement.getGeneratedKeys();
 			if (result.next()) {
 				entidade.setId(result.getLong(1));
-			}
-		} catch (SQLException e) {
-			printSQLException(e);
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException(e);
-		}
-
-		return entidade;
-	}
-
-	public Contato findByTelefone(String telefone) {
-		Contato entidade = null;
-		try (PreparedStatement preparedStatement = prepararSQL(BUSCAR_POR_TELEFONE_CONTATO_SQL)) {
-			preparedStatement.setString(1, telefone);
-			ResultSet rs = preparedStatement.executeQuery();
-
-			while (rs.next()) {
 			}
 		} catch (SQLException e) {
 			printSQLException(e);
@@ -82,7 +66,10 @@ public class ContatoDAO extends ConexaoDB {
 			while (rs.next()) {
 				String telefone = rs.getString("telefone");
 				int laboratorioId = rs.getInt("laboratorio_id");
-				entidade = new Contato(id, telefone, laboratorioId);
+				entidade = new Contato(
+						id,
+						telefone,
+						servicoLaboratorio.buscarPorId(laboratorioId));
 			}
 		} catch (SQLException e) {
 			printSQLException(e);
@@ -101,7 +88,10 @@ public class ContatoDAO extends ConexaoDB {
 				long id = rs.getLong("id");
 				String telefone = rs.getString("telefone");
 				int laboratorioId = rs.getInt("laboratorio_id");
-				entidades.add(new Contato(id, telefone, laboratorioId));
+				entidades.add(new Contato(
+						id,
+						telefone,
+						servicoLaboratorio.buscarPorId(laboratorioId)));
 			}
 		} catch (SQLException e) {
 			printSQLException(e);
@@ -124,9 +114,10 @@ public class ContatoDAO extends ConexaoDB {
 	public void updateContato(Contato entidade) throws SQLException {
 		try (PreparedStatement statement = prepararSQL(UPDATE_CONTATO_SQL)) {
 			statement.setString(1, entidade.getTelefone());
-			statement.setInt(2, entidade.getLaboratorio_id());
+			statement.setLong(2, entidade.getLaboratorio_id().getId());
 			statement.setLong(3, entidade.getId());
 
+			statement.executeUpdate();
 		} catch (ClassNotFoundException e) {
 			throw new RuntimeException(e);
 		}

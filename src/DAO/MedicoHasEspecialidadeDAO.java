@@ -1,6 +1,9 @@
 package DAO;
 
 import model.MedicoHasEspecialidade;
+import servico.ServicoEspecialidade;
+import servico.ServicoExame;
+import servico.ServicoMedico;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -9,6 +12,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MedicoHasEspecialidadeDAO extends ConexaoDB {
+    private static ServicoMedico servicoMedico = new ServicoMedico();
+    private static ServicoEspecialidade servicoEspecialidade = new ServicoEspecialidade();
     private static final String INSERT_MEDICO_HAS_ESPECIALIDADE_SQL = "INSERT INTO medico_has_especialidade (MEDICO_ID, ESPECIALIDADE_ID) VALUES (?, ?);";
     private static final String SELECT_MEDICO_HAS_ESPECIALIDADE_BY_ID = "SELECT id, MEDICO_ID, ESPECIALIDADE_ID FROM medico_has_especialidade WHERE id = ?";
     private static final String SELECT_ALL_MEDICO_HAS_ESPECIALIDADE = "SELECT * FROM medico_has_especialidade;";
@@ -37,8 +42,8 @@ public class MedicoHasEspecialidadeDAO extends ConexaoDB {
         try (PreparedStatement preparedStatement = prepararSQL(INSERT_MEDICO_HAS_ESPECIALIDADE_SQL,
                 java.sql.Statement.RETURN_GENERATED_KEYS)) {
 
-            preparedStatement.setInt(1, entidade.getMedico_id());
-            preparedStatement.setInt(2, entidade.getEspecialidade_id());
+            preparedStatement.setLong(1, entidade.getMedico_id().getId());
+            preparedStatement.setLong(2, entidade.getEspecialidade_id().getId());
 
             preparedStatement.executeUpdate();
 
@@ -64,7 +69,10 @@ public class MedicoHasEspecialidadeDAO extends ConexaoDB {
             while (rs.next()) {
                 int medico_id = rs.getInt("medico_id");
                 int especialidade_id = rs.getInt("especialidade_id");
-                entidade = new MedicoHasEspecialidade(id, medico_id, especialidade_id);
+                entidade = new MedicoHasEspecialidade(
+                        id,
+                        servicoMedico.buscarPorId(medico_id),
+                        servicoEspecialidade.buscarPorId(especialidade_id));
             }
         } catch (SQLException e) {
             printSQLException(e);
@@ -83,7 +91,10 @@ public class MedicoHasEspecialidadeDAO extends ConexaoDB {
                 long id = rs.getLong("id");
                 int medico_id = rs.getInt("medico_id");
                 int especialidade_id = rs.getInt("especialidade_id");
-                entidades.add(new MedicoHasEspecialidade(id, medico_id, especialidade_id));
+                entidades.add( new MedicoHasEspecialidade(
+                        id,
+                        servicoMedico.buscarPorId(medico_id),
+                        servicoEspecialidade.buscarPorId(especialidade_id)));
             }
         } catch (SQLException e) {
             printSQLException(e);
@@ -105,10 +116,11 @@ public class MedicoHasEspecialidadeDAO extends ConexaoDB {
 
     public void updateMedicoHasEspecialidade(MedicoHasEspecialidade entidade) throws SQLException {
         try (PreparedStatement statement = prepararSQL(UPDATE_MEDICO_HAS_ESPECIALIDADE_SQL)) {
-            statement.setInt(1, entidade.getMedico_id());
-            statement.setInt(2, entidade.getEspecialidade_id());
+            statement.setLong(1, entidade.getMedico_id().getId());
+            statement.setLong(2, entidade.getEspecialidade_id().getId());
             statement.setLong(3, entidade.getId());
 
+            statement.executeUpdate();
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }

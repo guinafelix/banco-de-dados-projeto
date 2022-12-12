@@ -8,8 +8,14 @@ import java.util.Date;
 import java.util.List;
 
 import model.SolicitacaoExame;
+import servico.ServicoConsultaMedica;
+import servico.ServicoExame;
+import servico.ServicoHabilitacaoExame;
 
 public class SolicitacaoExameDAO extends ConexaoDB {
+	private static ServicoConsultaMedica servicoConsultaMedica = new ServicoConsultaMedica();
+	private static ServicoHabilitacaoExame servicoHabilitacaoExame = new ServicoHabilitacaoExame();
+	private static ServicoExame servicoExame = new ServicoExame();
 	private static final String INSERT_SOLICITACAO_EXAME_SQL = "INSERT INTO SOLICITACAO_EXAME (NM_PRESCRITO, DT_SOLICITACAO, CONSULTA_MEDICA_ID, HABILITACAO_EXAME_ID, EXAME_ID) VALUES (?, ?, ?, ?, ?);";
 	private static final String SELECT_SOLICITACAO_EXAME_BY_ID = "SELECT id, NM_PRESCRITO, DT_SOLICITACAO, CONSULTA_MEDICA_ID, HABILITACAO_EXAME_ID, EXAME_ID FROM SOLICITACAO_EXAME WHERE id = ?";
 	private static final String SELECT_ALL_SOLICITACAO_EXAME = "SELECT * FROM SOLICITACAO_EXAME;";
@@ -41,9 +47,9 @@ public class SolicitacaoExameDAO extends ConexaoDB {
 			preparedStatement.setString(1, entidade.getNm_prescrito());
 			java.sql.Date sqlDate = new java.sql.Date(entidade.getDt_solicitacao().getTime());
 			preparedStatement.setDate(2, sqlDate) ;
-			preparedStatement.setInt(3, entidade.getConsulta_medica_id());
-			preparedStatement.setInt(4, entidade.getHabilitacao_exame_id());
-			preparedStatement.setInt(5, entidade.getExame_id());
+			preparedStatement.setLong(3, entidade.getConsulta_medica_id().getId());
+			preparedStatement.setLong(4, entidade.getHabilitacao_exame_id().getId());
+			preparedStatement.setLong(5, entidade.getExame_id().getId());
 			
 			preparedStatement.executeUpdate();
 
@@ -78,9 +84,9 @@ public class SolicitacaoExameDAO extends ConexaoDB {
 						id,
 						nmPrescrito,
 						dtSolicitacao,
-						consultaMedicaId,
-						habilitacaoExameId,
-						exameId);
+						servicoConsultaMedica.buscarPorId(consultaMedicaId),
+						servicoHabilitacaoExame.buscarPorId(habilitacaoExameId),
+						servicoExame.buscarPorId(exameId));
 			}
 		} catch (SQLException e) {
 			printSQLException(e);
@@ -107,9 +113,9 @@ public class SolicitacaoExameDAO extends ConexaoDB {
 						id,
 						nmPrescrito,
 						dtSolicitacao,
-						consultaMedicaId,
-						habilitacaoExameId,
-						exameId));
+						servicoConsultaMedica.buscarPorId(consultaMedicaId),
+						servicoHabilitacaoExame.buscarPorId(habilitacaoExameId),
+						servicoExame.buscarPorId(exameId)));
 			}
 		} catch (SQLException e) {
 			printSQLException(e);
@@ -134,12 +140,12 @@ public class SolicitacaoExameDAO extends ConexaoDB {
 			statement.setString(1, entidade.getNm_prescrito());
 			java.sql.Date sqlDate = new java.sql.Date(entidade.getDt_solicitacao().getTime());
 			statement.setDate(2, sqlDate);
-			statement.setInt(3, entidade.getConsulta_medica_id());
-			statement.setInt(4, entidade.getHabilitacao_exame_id());
-			statement.setInt(5, entidade.getExame_id());
-			
+			statement.setLong(3, entidade.getConsulta_medica_id().getId());
+			statement.setLong(4, entidade.getHabilitacao_exame_id().getId());
+			statement.setLong(5, entidade.getExame_id().getId());
 			statement.setLong(6, entidade.getId());
 
+			statement.executeUpdate();
 		} catch (ClassNotFoundException e) {
 			throw new RuntimeException(e);
 		}

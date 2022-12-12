@@ -5,26 +5,23 @@ public class ValorReferenciaComposicaoExame extends GenericModel {
 	private String valor_maximo;
 	private String limitador_minimo;
 	private String limitador_maximo;
-	private int unidade_medida_id;
-	
-	public ValorReferenciaComposicaoExame(Long id, String valor_minimo, String valor_maximo, String limitador_minimo,
-			String limitador_maximo, int unidade_medida_id) {
+	private UnidadeMedida unidade_medida_id;
+
+	public ValorReferenciaComposicaoExame(String valor_minimo, String valor_maximo, String limitador_minimo, String limitador_maximo, UnidadeMedida unidade_medida_id) {
+		this.valor_minimo = valor_minimo;
+		this.valor_maximo = valor_maximo;
+		this.limitador_minimo = limitador_minimo;
+		this.limitador_maximo = limitador_maximo;
+		this.unidade_medida_id = unidade_medida_id;
+	}
+
+	public ValorReferenciaComposicaoExame(Long id, String valor_minimo, String valor_maximo, String limitador_minimo, String limitador_maximo, UnidadeMedida unidade_medida_id) {
 		this.valor_minimo = valor_minimo;
 		this.valor_maximo = valor_maximo;
 		this.limitador_minimo = limitador_minimo;
 		this.limitador_maximo = limitador_maximo;
 		this.unidade_medida_id = unidade_medida_id;
 		super.setId(id);
-	}
-	
-	public ValorReferenciaComposicaoExame(String valor_minimo, String valor_maximo, String limitador_minimo,
-			String limitador_maximo, int unidade_medida_id) {
-		super();
-		this.valor_minimo = valor_minimo;
-		this.valor_maximo = valor_maximo;
-		this.limitador_minimo = limitador_minimo;
-		this.limitador_maximo = limitador_maximo;
-		this.unidade_medida_id = unidade_medida_id;
 	}
 
 	public String getValor_minimo() {
@@ -59,11 +56,11 @@ public class ValorReferenciaComposicaoExame extends GenericModel {
 		this.limitador_maximo = limitador_maximo;
 	}
 
-	public int getUnidade_medida_id() {
+	public UnidadeMedida getUnidade_medida_id() {
 		return unidade_medida_id;
 	}
 
-	public void setUnidade_medida_id(int unidade_medida_id) {
+	public void setUnidade_medida_id(UnidadeMedida unidade_medida_id) {
 		this.unidade_medida_id = unidade_medida_id;
 	}
 

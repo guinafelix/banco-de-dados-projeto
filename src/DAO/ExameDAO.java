@@ -7,13 +7,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.Exame;
+import servico.ServicoMaterialExame;
+import servico.ServicoTipoExame;
 
 public class ExameDAO extends ConexaoDB {
+	private static ServicoMaterialExame servicoMaterialExame = new ServicoMaterialExame();
+	private static ServicoTipoExame servicoTipoExame = new ServicoTipoExame();
 	private static final String INSERT_EXAME_SQL = "INSERT INTO EXAME (DESCRICAO, METODO, MATERIAL_EXAME_ID, TIPO_EXAME_ID) VALUES (?, ?, ?, ?);";
 	private static final String SELECT_EXAME_BY_ID = "SELECT id, DESCRICAO, METODO, MATERIAL_EXAME_ID, TIPO_EXAME_ID FROM EXAME WHERE id = ?";
 	private static final String SELECT_ALL_EXAME = "SELECT * FROM EXAME;";
 	private static final String DELETE_EXAME_SQL = "DELETE FROM EXAME WHERE id = ?;";
-	private static final String BUSCAR_POR_DESCRICAO_EXAME_SQL = "SELECT FROM EXAME WHERE DESCRICAO = ?;";
 	private static final String UPDATE_EXAME_SQL = "UPDATE EXAME SET DESCRICAO = ?, METODO = ?, MATERIAL_EXAME_ID = ?, TIPO_EXAME_ID = ? WHERE id = ?;";
 	private static final String TOTAL = "SELECT count(1) FROM EXAME;";
     
@@ -40,8 +43,8 @@ public class ExameDAO extends ConexaoDB {
 
 			preparedStatement.setString(1, entidade.getDescricao());
 			preparedStatement.setString(2, entidade.getMetodo());
-			preparedStatement.setInt(3, entidade.getMaterial_exame_id());
-			preparedStatement.setInt(4, entidade.getTipo_exame_id());
+			preparedStatement.setLong(3, entidade.getMaterial_exame_id().getId());
+			preparedStatement.setLong(4, entidade.getTipo_exame_id().getId());
 			
 			preparedStatement.executeUpdate();
 
@@ -58,29 +61,6 @@ public class ExameDAO extends ConexaoDB {
 		return entidade;
 	}
     
-    public Exame findByDescricao(String descricao) {
-		Exame entidade = null;
-		try (PreparedStatement preparedStatement = prepararSQL( BUSCAR_POR_DESCRICAO_EXAME_SQL)) {
-			preparedStatement.setString(1, descricao);
-			ResultSet rs = preparedStatement.executeQuery();
-
-			while (rs.next()) {
-				entidade = new Exame(
-						rs.getLong("id"), 
-						rs.getString("descricao"),
-						rs.getString("metodo "),
-						rs.getInt("  material_exame_id"),
-						rs.getInt("tipo_exame_id"));
-			}
-		} catch (SQLException e) {
-			printSQLException(e);
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException(e);
-		}
-		return entidade;
-    }
-	
-    
     public Exame findById(long id) {
 		Exame entidade = null;
 		try (PreparedStatement preparedStatement = prepararSQL(SELECT_EXAME_BY_ID)) {
@@ -93,7 +73,12 @@ public class ExameDAO extends ConexaoDB {
 				int materialExameId = rs.getInt("material_exame_id");
 				int tipoExameId = rs.getInt("tipo_exame_id");
 				
-				entidade = new Exame(id, descricao, metodo, materialExameId, tipoExameId);
+				entidade = new Exame(
+						id,
+						descricao,
+						metodo,
+						servicoMaterialExame.buscarPorId(materialExameId),
+						servicoTipoExame.buscarPorId(tipoExameId));
 			}
 		} catch (SQLException e) {
 			printSQLException(e);
@@ -115,7 +100,12 @@ public class ExameDAO extends ConexaoDB {
 				int materialExameId = rs.getInt("material_exame_id");
 				int tipoExameId = rs.getInt("tipo_exame_id");
 				
-				entidades.add(new Exame(id, descricao, metodo, materialExameId, tipoExameId));
+				entidades.add(new Exame(
+						id,
+						descricao,
+						metodo,
+						servicoMaterialExame.buscarPorId(materialExameId),
+						servicoTipoExame.buscarPorId(tipoExameId)));
 			}
 		} catch (SQLException e) {
 			printSQLException(e);
@@ -139,11 +129,11 @@ public class ExameDAO extends ConexaoDB {
 		try (PreparedStatement statement = prepararSQL(UPDATE_EXAME_SQL)) {
 			statement.setString(1, entidade.getDescricao());
 			statement.setString(2, entidade.getMetodo());
-			statement.setInt(3, entidade.getMaterial_exame_id());
-			statement.setInt(4, entidade.getTipo_exame_id());
-			
+			statement.setLong(3, entidade.getMaterial_exame_id().getId());
+			statement.setLong(4, entidade.getTipo_exame_id().getId());
 			statement.setLong(5, entidade.getId());
 
+			statement.executeUpdate();
 		} catch (ClassNotFoundException e) {
 			throw new RuntimeException(e);
 		}

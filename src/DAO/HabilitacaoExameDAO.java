@@ -7,13 +7,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.HabilitacaoExame;
+import servico.ServicoExame;
+import servico.ServicoLaboratorio;
+import servico.ServicoTipoExame;
 
 public class HabilitacaoExameDAO extends ConexaoDB {
+	private static ServicoLaboratorio servicoLaboratorio = new ServicoLaboratorio();
+	private static ServicoTipoExame servicoTipoExame = new ServicoTipoExame();
 	private static final String INSERT_HABILITACAO_EXAME_SQL = "INSERT INTO HABILITACAO_EXAME (observacao, custo, id_laboratorio, tipo_exame_id) VALUES (?, ?, ?, ?);";
 	private static final String SELECT_HABILITACAO_EXAME_BY_ID = "SELECT id, observacao, custo, id_laboratorio, tipo_exame_id FROM HABILITACAO_EXAME WHERE id = ?";
 	private static final String SELECT_ALL_HABILITACAO_EXAME = "SELECT * FROM HABILITACAO_EXAME;";
 	private static final String DELETE_HABILITACAO_EXAME_SQL = "DELETE FROM HABILITACAO_EXAME WHERE id = ?;";
-	private static final String BUSCAR_POR_OBSERVACAO_HABILITACAO_EXAME_SQL = "SELECT FROM HABILITACAO_EXAME WHERE OBSERVACAO = ?;";
 	private static final String UPDATE_HABILITACAO_EXAME_SQL = "UPDATE HABILITACAO_EXAME SET observacao = ?, custo = ?, id_laboratorio = ?, tipo_exame_id = ? WHERE id = ?;";
 	private static final String TOTAL = "SELECT count(1) FROM HABILITACAO_EXAME;";
     
@@ -40,8 +44,8 @@ public class HabilitacaoExameDAO extends ConexaoDB {
 
 			preparedStatement.setString(1, entidade.getObservacao());
 			preparedStatement.setDouble(2, entidade.getCusto());
-			preparedStatement.setInt(3, entidade.getId_laboratorio());
-			preparedStatement.setInt(4, entidade.getTipo_exame_id());
+			preparedStatement.setLong(3, entidade.getId_laboratorio().getId());
+			preparedStatement.setLong(4, entidade.getTipo_exame_id().getId());
 			
 			preparedStatement.executeUpdate();
 
@@ -58,29 +62,6 @@ public class HabilitacaoExameDAO extends ConexaoDB {
 		return entidade;
 	}
     
-    public HabilitacaoExame findByObservacao(String observacao) {
-		HabilitacaoExame entidade = null;
-		try (PreparedStatement preparedStatement = prepararSQL( BUSCAR_POR_OBSERVACAO_HABILITACAO_EXAME_SQL)) {
-			preparedStatement.setString(1, observacao);
-			ResultSet rs = preparedStatement.executeQuery();
-
-			while (rs.next()) {
-				entidade = new HabilitacaoExame(
-						rs.getLong("id"), 
-						rs.getString("observacao"),
-						rs.getDouble("custo"),
-						rs.getInt("id_laboratorio"),
-						rs.getInt("tipo_exame_id"));
-			}
-		} catch (SQLException e) {
-			printSQLException(e);
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException(e);
-		}
-		return entidade;
-    }
-	
-    
     public HabilitacaoExame findById(long id) {
 		HabilitacaoExame entidade = null;
 		try (PreparedStatement preparedStatement = prepararSQL(SELECT_HABILITACAO_EXAME_BY_ID)) {
@@ -93,7 +74,12 @@ public class HabilitacaoExameDAO extends ConexaoDB {
 				int laboratorioId = rs.getInt("id_laboratorio");
 				int tipoExameId = rs.getInt("tipo_exame_id");
 				
-				entidade = new HabilitacaoExame(id, observacao, custo, laboratorioId, tipoExameId);
+				entidade = new HabilitacaoExame(
+						id,
+						observacao,
+						custo,
+						servicoLaboratorio.buscarPorId(laboratorioId),
+						servicoTipoExame.buscarPorId(tipoExameId));
 			}
 		} catch (SQLException e) {
 			printSQLException(e);
@@ -115,7 +101,12 @@ public class HabilitacaoExameDAO extends ConexaoDB {
 				int laboratorioId = rs.getInt("id_laboratorio");
 				int tipoExameId = rs.getInt("tipo_exame_id");
 				
-				entidades.add(new HabilitacaoExame(id, observacao, custo, laboratorioId, tipoExameId));
+				entidades.add(new HabilitacaoExame(
+						id,
+						observacao,
+						custo,
+						servicoLaboratorio.buscarPorId(laboratorioId),
+						servicoTipoExame.buscarPorId(tipoExameId)));
 			}
 		} catch (SQLException e) {
 			printSQLException(e);
@@ -139,11 +130,11 @@ public class HabilitacaoExameDAO extends ConexaoDB {
 		try (PreparedStatement statement = prepararSQL(UPDATE_HABILITACAO_EXAME_SQL)) {
 			statement.setString(1, entidade.getObservacao());
 			statement.setDouble(2, entidade.getCusto());
-			statement.setInt(3, entidade.getId_laboratorio());
-			statement.setInt(4, entidade.getTipo_exame_id());
-			
+			statement.setLong(3, entidade.getId_laboratorio().getId());
+			statement.setLong(4, entidade.getTipo_exame_id().getId());
 			statement.setLong(5, entidade.getId());
 
+			statement.executeUpdate();
 		} catch (ClassNotFoundException e) {
 			throw new RuntimeException(e);
 		}

@@ -7,10 +7,19 @@ public class Endereco extends GenericModel {
 	private String bairro;
 	private String cep;
 	private String cidade;
-	private int laboratorio_id;
-	
-	public Endereco(Long id, String rua, String numero, String complemento, String bairro, String cep, String cidade,
-			int laboratorio_id) {
+	private Laboratorio laboratorio_id;
+
+	public Endereco(String rua, String numero, String complemento, String bairro, String cep, String cidade, Laboratorio laboratorio_id) {
+		this.rua = rua;
+		this.numero = numero;
+		this.complemento = complemento;
+		this.bairro = bairro;
+		this.cep = cep;
+		this.cidade = cidade;
+		this.laboratorio_id = laboratorio_id;
+	}
+
+	public Endereco(Long id, String rua, String numero, String complemento, String bairro, String cep, String cidade, Laboratorio laboratorio_id) {
 		this.rua = rua;
 		this.numero = numero;
 		this.complemento = complemento;
@@ -19,18 +28,6 @@ public class Endereco extends GenericModel {
 		this.cidade = cidade;
 		this.laboratorio_id = laboratorio_id;
 		super.setId(id);
-	}
-
-	public Endereco(String rua, String numero, String complemento, String bairro, String cep, String cidade,
-			int laboratorio_id) {
-		super();
-		this.rua = rua;
-		this.numero = numero;
-		this.complemento = complemento;
-		this.bairro = bairro;
-		this.cep = cep;
-		this.cidade = cidade;
-		this.laboratorio_id = laboratorio_id;
 	}
 
 	public String getRua() {
@@ -81,23 +78,24 @@ public class Endereco extends GenericModel {
 		this.cidade = cidade;
 	}
 
-	public int getLaboratorio_id() {
+	public Laboratorio getLaboratorio_id() {
 		return laboratorio_id;
 	}
 
-	public void setLaboratorio_id(int laboratorio_id) {
+	public void setLaboratorio_id(Laboratorio laboratorio_id) {
 		this.laboratorio_id = laboratorio_id;
 	}
 
 	@Override
-	public String toString(){
-		return "Endereco: {" +
-				"rua: " + rua +
-				"numero: " + numero +
-				"complemento: " + complemento +
-				"bairro: " + bairro +
-				"cep: " + cep +
-				"cidade: " + cidade +
-				"laboratorio_id: " + laboratorio_id;
+	public String toString() {
+		return "Endereco{" +
+				"rua='" + rua + '\'' +
+				", numero='" + numero + '\'' +
+				", complemento='" + complemento + '\'' +
+				", bairro='" + bairro + '\'' +
+				", cep='" + cep + '\'' +
+				", cidade='" + cidade + '\'' +
+				", laboratorio_id=" + laboratorio_id +
+				'}';
 	}
 }

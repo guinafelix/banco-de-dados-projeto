@@ -8,13 +8,16 @@ import java.util.Date;
 import java.util.List;
 
 import model.ResultadoExame;
+import servico.ServicoComposicao;
+import servico.ServicoLaudo;
 
 public class ResultadoExameDAO extends ConexaoDB {
+	private static ServicoComposicao servicoComposicao = new ServicoComposicao();
+	private static ServicoLaudo servicoLaudo = new ServicoLaudo();
 	private static final String INSERT_RESULTADO_EXAME_SQL = "INSERT INTO RESULTADO_EXAME (DT_EXAME, VALOR, COMPOSICAO_ID, LAUDO_ID) VALUES (?, ?, ?, ?);";
 	private static final String SELECT_RESULTADO_EXAME_BY_ID = "SELECT id, DT_EXAME, VALOR, COMPOSICAO_ID, LAUDO_ID FROM RESULTADO_EXAME WHERE id = ?";
 	private static final String SELECT_ALL_RESULTADO_EXAME = "SELECT * FROM RESULTADO_EXAME;";
 	private static final String DELETE_RESULTADO_EXAME_SQL = "DELETE FROM RESULTADO_EXAME WHERE id = ?;";
-	private static final String BUSCAR_POR_LAUDO_ID_RESULTADO_EXAME_SQL = "SELECT FROM RESULTADO_EXAME WHERE LAUDO_ID = ?;";
 	private static final String UPDATE_RESULTADO_EXAME_SQL = "UPDATE RESULTADO_EXAME SET DT_EXAME = ?, VALOR = ?, COMPOSICAO_ID = ?, LAUDO_ID = ? WHERE id = ?;";
 	private static final String TOTAL = "SELECT count(1) FROM RESULTADO_EXAME;";
     
@@ -42,8 +45,8 @@ public class ResultadoExameDAO extends ConexaoDB {
 			java.sql.Date sqlDate = new java.sql.Date(entidade.getDt_exame().getTime());
 			preparedStatement.setDate(1, sqlDate) ;
 			preparedStatement.setString(2, entidade.getValor());
-			preparedStatement.setInt(3, entidade.getComposicao_id());
-			preparedStatement.setInt(4, entidade.getLaudo_id());
+			preparedStatement.setLong(3, entidade.getComposicao_id().getId());
+			preparedStatement.setLong(4, entidade.getLaudo_id().getId());
 
 			preparedStatement.executeUpdate();
 
@@ -59,29 +62,7 @@ public class ResultadoExameDAO extends ConexaoDB {
 
 		return entidade;
 	}
-    
-    public ResultadoExame findByLaudoId(String laudoId) {
-		ResultadoExame entidade = null;
-		try (PreparedStatement preparedStatement = prepararSQL( BUSCAR_POR_LAUDO_ID_RESULTADO_EXAME_SQL)) {
-			preparedStatement.setString(1, laudoId);
-			ResultSet rs = preparedStatement.executeQuery();
 
-			while (rs.next()) {
-				entidade = new ResultadoExame(
-						rs.getLong("id"),
-						rs.getDate("dt_exame"),
-						rs.getString("valor "),
-						rs.getInt("composicao_id"),
-						rs.getInt("laudo_id"));
-			}
-		} catch (SQLException e) {
-			printSQLException(e);
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException(e);
-		}
-
-		return entidade;
-	}
     
     public ResultadoExame findById(long id) {
 		ResultadoExame entidade = null;
@@ -94,7 +75,12 @@ public class ResultadoExameDAO extends ConexaoDB {
 				String valor = rs.getString("valor");
 				int composicaoId = rs.getInt("composicao_id");
 				int laudoId = rs.getInt("laudo_id");
-				entidade = new ResultadoExame(id, dtExame, valor, composicaoId, laudoId);
+				entidade = new ResultadoExame(
+						id,
+						dtExame,
+						valor,
+						servicoComposicao.buscarPorId(composicaoId),
+						servicoLaudo.buscarPorId(laudoId));
 			}
 		} catch (SQLException e) {
 			printSQLException(e);
@@ -115,7 +101,12 @@ public class ResultadoExameDAO extends ConexaoDB {
 				String valor = rs.getString("valor");
 				int composicaoId = rs.getInt("composicao_id");
 				int laudoId = rs.getInt("laudo_id");
-				entidades.add(new ResultadoExame(id, dtExame, valor, composicaoId, laudoId));
+				entidades.add(new ResultadoExame(
+						id,
+						dtExame,
+						valor,
+						servicoComposicao.buscarPorId(composicaoId),
+						servicoLaudo.buscarPorId(laudoId)));
 			}
 		} catch (SQLException e) {
 			printSQLException(e);
@@ -140,10 +131,11 @@ public class ResultadoExameDAO extends ConexaoDB {
 			java.sql.Date sqlDate = new java.sql.Date(entidade.getDt_exame().getTime());
 			statement.setDate(1, sqlDate) ;
 			statement.setString(2, entidade.getValor());
-			statement.setInt(3, entidade.getComposicao_id());
-			statement.setInt(4, entidade.getLaudo_id());
+			statement.setLong(3, entidade.getComposicao_id().getId());
+			statement.setLong(4, entidade.getLaudo_id().getId());
 			statement.setLong(5, entidade.getId());
 
+			statement.executeUpdate();
 		} catch (ClassNotFoundException e) {
 			throw new RuntimeException(e);
 		}

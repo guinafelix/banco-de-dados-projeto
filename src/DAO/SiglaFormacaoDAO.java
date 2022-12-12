@@ -124,6 +124,7 @@ public class SiglaFormacaoDAO extends ConexaoDB {
 				statement.setString(1, entidade.getSigla());
 				statement.setLong(2, entidade.getId());
 
+				statement.executeUpdate();
 			} catch (ClassNotFoundException e) {
 				throw new RuntimeException(e);
 			}

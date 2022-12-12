@@ -26,7 +26,7 @@ public class ServicoPaciente {
 		return pacienteDAO.selectAllPacientes();
 	}
 
-	public void remover(Integer id) throws SQLException {
+	public void remover(int id) throws SQLException {
 		pacienteDAO.deletePaciente(id);
 	}
 }

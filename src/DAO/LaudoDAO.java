@@ -7,8 +7,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.Laudo;
+import servico.ServicoSolicitacaoExame;
 
 public class LaudoDAO extends ConexaoDB {
+	private static ServicoSolicitacaoExame servicoSolicitacaoExame = new ServicoSolicitacaoExame();
 	private static final String INSERT_LAUDO_SQL = "INSERT INTO laudo (assinatura_digital, dt_resultado, codigo, solicitacao_exame_id) VALUES (?, ?, ?, ?);";
 	private static final String SELECT_LAUDO_BY_ID = "SELECT id, assinatura_digital, dt_resultado, codigo, solicitacao_exame_id  FROM laudo WHERE id = ?";
 	private static final String SELECT_ALL_LAUDO = "SELECT * FROM laudo;";
@@ -41,7 +43,7 @@ public class LaudoDAO extends ConexaoDB {
 			preparedStatement.setString(1, entidade.getAssinaturaDigital());
 			preparedStatement.setString(2, entidade.getDt_resultado());
 			preparedStatement.setString(3, entidade.getCodigo());
-			preparedStatement.setInt(4, entidade.getSolicitacao_exame_id());
+			preparedStatement.setLong(4, entidade.getSolicitacao_exame_id().getId());
 
 			preparedStatement.executeUpdate();
 
@@ -87,7 +89,12 @@ public class LaudoDAO extends ConexaoDB {
 				String codigo = rs.getString("codigo");
 				int solicitacaoExameId = rs.getInt("solicitacao_exame_id");
 				
-				entidade = new Laudo(id, assinaturaDigital, dtResultado, codigo, solicitacaoExameId);
+				entidade = new Laudo(
+						id,
+						assinaturaDigital,
+						dtResultado,
+						codigo,
+						servicoSolicitacaoExame.buscarPorId(solicitacaoExameId));
 			}
 		} catch (SQLException e) {
 			printSQLException(e);
@@ -109,7 +116,12 @@ public class LaudoDAO extends ConexaoDB {
 				String codigo = rs.getString("codigo");
 				int solicitacaoExameId = rs.getInt("solicitacao_exame_id");
 				
-				entidades.add(new Laudo(id, assinaturaDigital, dtResultado, codigo, solicitacaoExameId));
+				entidades.add(new Laudo(
+						id,
+						assinaturaDigital,
+						dtResultado,
+						codigo,
+						servicoSolicitacaoExame.buscarPorId(solicitacaoExameId)));
 			}
 		} catch (SQLException e) {
 			printSQLException(e);
@@ -134,9 +146,10 @@ public class LaudoDAO extends ConexaoDB {
 			statement.setString(1, entidade.getAssinaturaDigital());
 			statement.setString(2, entidade.getDt_resultado());
 			statement.setString(3, entidade.getCodigo());
-			statement.setInt(4, entidade.getSolicitacao_exame_id());
+			statement.setLong(4, entidade.getSolicitacao_exame_id().getId());
 			statement.setLong(5, entidade.getId());
 
+			statement.executeUpdate();
 		} catch (ClassNotFoundException e) {
 			throw new RuntimeException(e);
 		}

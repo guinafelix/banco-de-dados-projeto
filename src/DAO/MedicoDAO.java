@@ -9,7 +9,6 @@ import java.util.List;
 import model.Medico;
 
 public class MedicoDAO extends ConexaoDB{
-	
 	private static final String INSERT_Medico_SQL = "INSERT INTO medico (NOME, CRM) VALUES (?, ?);";
 	private static final String SELECT_Medico_BY_ID = "SELECT id, NOME, crm FROM Medico WHERE id = ?";
 	private static final String SELECT_ALL_Medico = "SELECT * FROM medico;";
@@ -129,6 +128,7 @@ public class MedicoDAO extends ConexaoDB{
 			statement.setString(2, entidade.getCrm());
 			statement.setLong(3, entidade.getId());
 
+			statement.executeUpdate();
 		} catch (ClassNotFoundException e) {
 			throw new RuntimeException(e);
 		}

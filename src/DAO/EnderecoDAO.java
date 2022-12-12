@@ -7,8 +7,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.Endereco;
+import servico.ServicoLaboratorio;
 
 public class EnderecoDAO extends ConexaoDB {
+	private static ServicoLaboratorio servicoLaboratorio = new ServicoLaboratorio();
 	private static final String INSERT_ENDERECO_SQL = "INSERT INTO ENDERECO (RUA, NUMERO, COMPLEMENTO, BAIRRO, CEP, CIDADE, LABORATORIO_ID) VALUES (?, ?, ?, ?, ?, ?, ?);";
 	private static final String SELECT_ENDERECO_BY_ID = "SELECT id,RUA, NUMERO, COMPLEMENTO, BAIRRO, CEP, CIDADE, LABORATORIO_ID FROM ENDERECO WHERE id = ?";
 	private static final String SELECT_ALL_ENDERECO = "SELECT * FROM ENDERECO;";
@@ -43,7 +45,7 @@ public class EnderecoDAO extends ConexaoDB {
 			preparedStatement.setString(4, entidade.getBairro());
 			preparedStatement.setString(5, entidade.getCep());
 			preparedStatement.setString(6, entidade.getCidade());
-			preparedStatement.setInt(7, entidade.getLaboratorio_id());
+			preparedStatement.setLong(7, entidade.getLaboratorio_id().getId());
 			
 			preparedStatement.executeUpdate();
 
@@ -83,7 +85,7 @@ public class EnderecoDAO extends ConexaoDB {
 						bairro,
 						cep,
 						cidade,
-						laboratorioId);
+						servicoLaboratorio.buscarPorId(laboratorioId));
 			}
 		} catch (SQLException e) {
 			printSQLException(e);
@@ -116,7 +118,7 @@ public class EnderecoDAO extends ConexaoDB {
 						bairro,
 						cep,
 						cidade,
-						laboratorioId));
+						servicoLaboratorio.buscarPorId(laboratorioId)));
 			}
 		} catch (SQLException e) {
 			printSQLException(e);
@@ -143,10 +145,10 @@ public class EnderecoDAO extends ConexaoDB {
 			statement.setString(4, entidade.getComplemento());
 			statement.setString(5, entidade.getBairro());
 			statement.setString(6, entidade.getCep());
-			statement.setInt(7, entidade.getLaboratorio_id());
-			
+			statement.setLong(7, entidade.getLaboratorio_id().getId());
 			statement.setLong(8, entidade.getId());
 
+			statement.executeUpdate();
 		} catch (ClassNotFoundException e) {
 			throw new RuntimeException(e);
 		}
