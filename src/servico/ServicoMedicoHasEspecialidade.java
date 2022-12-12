@@ -13,8 +13,8 @@ public class ServicoMedicoHasEspecialidade {
         return medicoHasEspecialidadeDAO.insert(entidade);
     }
 
-    public MedicoHasEspecialidade buscarPorId(Integer id) {
-        return medicoHasEspecialidadeDAO.findById(id);
+    public List<MedicoHasEspecialidade>buscarPorMedicoId(Integer id) {
+        return medicoHasEspecialidadeDAO.findByMedicoId(id);
     }
 
     public void update(MedicoHasEspecialidade medico) throws SQLException {
