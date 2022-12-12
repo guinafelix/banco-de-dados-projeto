@@ -142,8 +142,9 @@ public class EnderecoDAO extends ConexaoDB {
 		try (PreparedStatement statement = prepararSQL(UPDATE_ENDERECO_SQL)) {
 			statement.setString(1, entidade.getRua());
 			statement.setString(2, entidade.getNumero());
-			statement.setString(4, entidade.getComplemento());
-			statement.setString(5, entidade.getBairro());
+			statement.setString(3, entidade.getComplemento());
+			statement.setString(4, entidade.getBairro());
+			statement.setString(5, entidade.getCidade());
 			statement.setString(6, entidade.getCep());
 			statement.setLong(7, entidade.getLaboratorio_id().getId());
 			statement.setLong(8, entidade.getId());
